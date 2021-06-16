@@ -4,7 +4,13 @@ from apps.users_app.models import User, Administrator
 import re
 
 # Create your models here.
-
+def ValidarLongitud(cadena):
+    if len(cadena) < 8:
+        raise forms.ValidationError(
+            f'Error: Debe contener mínimo 3 caracteres'
+        )
+def ValidarRut(cadena):
+    pass
 
 class Lawsuit_State(models.Model):
     name_state = models.CharField(max_length=45)
@@ -14,12 +20,12 @@ class Lawsuit_State(models.Model):
 
 
 class Defendant(models.Model): 
-    first_name1 = models.CharField(max_length=45, blank=False, null=False) #este campo
-    first_name2 = models.CharField(max_length=45, blank=False, null=False) #este campo
-    last_name1 = models.CharField(max_length=45, blank=False, null=False) #este campo
-    last_name2 = models.CharField(max_length=45, blank=False, null=False) #este campo
-    address = models.CharField(max_length=255, blank=False, null=False) #este campo
-    rut = models.CharField(max_length=10, blank=False, null=False) #este campo
+    first_name1 = models.CharField(max_length=45, blank=False, null=False, validators=[ValidarLongitud]) #este campo
+    first_name2 = models.CharField(max_length=45, blank=False, null=False, validators=[ValidarLongitud]) #este campo
+    last_name1 = models.CharField(max_length=45, blank=False, null=False, validators=[ValidarLongitud]) #este campo
+    last_name2 = models.CharField(max_length=45, blank=False, null=False, validators=[ValidarLongitud]) #este campo
+    address = models.CharField(max_length=255, blank=False, null=False,validators=[ValidarLongitud]) #este campo
+    rut = models.CharField(max_length=10, blank=False, null=False,validators=[ValidarRut]) #este campo
 
     # email = models.CharField(max_length=45, blank=False, null=False)
     # password = models.CharField(max_length=100, blank=False, null=False)
