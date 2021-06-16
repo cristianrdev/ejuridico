@@ -69,14 +69,15 @@ class User(models.Model):
 
 
 class Defendant(models.Model):
-    first_name1 = models.CharField(max_length=45)
-    first_name2 = models.CharField(max_length=45)
-    last_name1 = models.CharField(max_length=45)
-    last_name2 = models.CharField(max_length=45)
-    address = models.CharField(max_length=45)
-    rut = models.CharField(max_length=10)
-    email = models.CharField(max_length=45)
-    password = models.CharField(max_length=100)
+    first_name1 = models.CharField(max_length=45, blank=False, null=False)
+    first_name2 = models.CharField(max_length=45, blank=False, null=False)
+    last_name1 = models.CharField(max_length=45, blank=False, null=False)
+    last_name2 = models.CharField(max_length=45, blank=False, null=False)
+    address = models.CharField(max_length=45, blank=False, null=False)
+    rut = models.CharField(max_length=10, blank=False, null=False)
+    email = models.CharField(max_length=45, blank=False, null=False)
+    password = models.CharField(max_length=100, blank=False, null=False)
+    defendant_created_by = models.ForeignKey(Administrator, related_name="user_create_defendant", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
