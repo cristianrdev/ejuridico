@@ -78,3 +78,6 @@ class Defendant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Lawsuit(model.Model):
+    num_pagare = models.CharField(max_length=45)
+    fecha_mora = models.CharField(max_length=10)
