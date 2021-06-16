@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from apps.admin_app.models import Administrator, User
+# from apps.admin_app.models import Administrator, User
+from apps.users_app.models import Administrator, User
 
 
 

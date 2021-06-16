@@ -1,11 +1,15 @@
 from django.shortcuts import render, render
-from apps.users_app.models import 
+from apps.users_app.forms.register import AdministratorForm
 
 
 def index(request):
 
-    administratorForm
-    return render(request, 'landing.html')
+    context = {
+
+        'administratorform' : AdministratorForm()
+    }
+    
+    return render(request, 'landing.html', context)
 
 
 
