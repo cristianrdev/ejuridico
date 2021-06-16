@@ -1,6 +1,5 @@
 from django.db import models
-<<<<<<< HEAD
-=======
+
 from django import forms
 import re
 
@@ -81,4 +80,4 @@ class Defendant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
->>>>>>> e58ea8af5a30dc900b35bf5f71f64d2bb594493f
+
