@@ -80,4 +80,29 @@ class Defendant(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class Court(model.Model):
+    name_court = models.CharField(max_length=45)
+    comuna = models.CharField(max_length=45)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
+class Lawsuit_State(model.Model):
+    name_state = models.CharField(max_length=45)
+    demand_state = models.CharField(max_length=45)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Lawsuit(model.Model):
+    num_promissory_notes = models.CharField(max_length=45)
+    final_date = models.DateField()
+    mount_to_pay = models.IntegerField()
+    num_operation = models.CharField(max_length=255)
+    suscription_date= models.DateField()
+    demand_amount= models.IntegerField()
+    cause_rol = models.CharField(max_length=45)
+    current_defendant = models.ForeignKey(Defendant, related_name="lawsuits", on_delete = models.CASCADE)
+    current_demand_state = models.ForeignKey(Lawsuit_State, related_name="lawsuits", on_delete = models.CASCADE)
+    current_court = models.ForeignKey(Lawsuit_State, related_name="lawsuits", on_delete = models.CASCADE)
+    users_who_manage_lawsuit = models.ManyToManyField(User, related_name = "manage_lawsuit")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
