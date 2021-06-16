@@ -44,6 +44,10 @@ class Administrator(models.Model): #super usuario que crea o elimina User (hay q
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class UserType(models.Model):
+    type_name = models.CharField(max_length=50, blank=False, null=False) #secretaria, abogado, o procuradora
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 class User(models.Model):
     first_name1 = models.CharField(max_length=45, blank=False, null=False)
@@ -53,16 +57,14 @@ class User(models.Model):
     rut = models.CharField(max_length=20, blank=False, null=False)
     email = models.CharField(max_length=30, blank=False, null=False, validators=[validarEmail])
     password = models.CharField(max_length=100, validators=[ValidarLongitudPassword])
+    type = models.ForeignKey(UserType, related_name="user_type", on_delete = models.CASCADE)
     users_created_by = models.ForeignKey(Administrator, related_name="administrator_create", on_delete = models.CASCADE)
     # user_manage_lawsuit = models.ManyToManyField(Lawsuit, related_name="lawsuit_managed_by")
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class UserType(models.Model):
-    type_name = models.CharField(max_length=50, blank=False, null=False) #secretaria, abogado, o procuradora
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
 
 
 
