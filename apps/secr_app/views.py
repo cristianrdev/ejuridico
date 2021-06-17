@@ -1,6 +1,7 @@
 from apps.users_app.models import Administrator, User, UserType
 from django.shortcuts import redirect, render
 from apps.users_app.forms.register import UserForm
+from apps.forms.new_lawsuit import LawsuitForm, DefendantForm
 
 def index(request):
     if not 'id' in request.session or request.session['user_type'] != "administrator":
