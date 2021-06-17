@@ -14,13 +14,13 @@ class AdministratorForm(ModelForm):
 
         # }
         labels = {
-                'first_name1': 'Breve descripción profesional:',
-                'first_name2': 'Breve descripción profesional:',
-                'last_name1': 'Breve descripción profesional:',
-                'last_name2': 'Breve descripción profesional:',
-                'rut': 'Breve descripción profesional:',
-                'email': 'Breve descripción profesional:',
-                'password': 'Breve descripción profesional:',
+                'first_name1': 'Nombre:',
+                'first_name2': 'Segundo Nombre:',
+                'last_name1': 'Apellido paterno:',
+                'last_name2': 'Apellido Materno:',
+                'rut': 'Rut:',
+                'email': 'email:',
+                'password': 'Contraseña:',
         }
 
 

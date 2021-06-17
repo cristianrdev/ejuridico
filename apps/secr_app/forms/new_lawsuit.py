@@ -1,7 +1,7 @@
 from django.db.models.base import Model
 from django import forms
 from django.forms import ModelForm
-from apps.secr_app import Defendant
+from apps.secr_app.models import Defendant
 from ..models import Lawsuit
 
 class DefendantForm(ModelForm):
@@ -16,7 +16,7 @@ class DefendantForm(ModelForm):
                 'first_name2': 'Segundo Nombre',
                 'last_name1': 'Primer Apellido',
                 'last_name2': 'Segundo Apellido',
-                'adress': 'Dirección Completa',
+                'address': 'Dirección Completa',
                 'rut': 'RUT',
         }
 
@@ -24,6 +24,10 @@ class LawsuitForm(ModelForm):
     class Meta:
         model = Lawsuit
         fields = ['num_promissory_notes','final_date','mount_to_pay','num_operation','suscription_date','demand_amount']
+
+        widgets = {
+            'final_date': forms.Textarea(attrs = {"class":"form-control ", "rows":4, "cols": "50%" , "style":"resize: none;"})
+            }
 
         labels ={
             'num_promissory_notes':'Número Pagaré',
