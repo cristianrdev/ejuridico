@@ -99,17 +99,17 @@ class User(models.Model):
 
     @staticmethod
     def authenticate(email, password):
-        org = User.objects.filter(email = email)
-        print ('user', org)
+        user = User.objects.filter(email = email)
+        print ('user', user)
         #buscar si hay un email en la base de datos
-        if len(org) == 1:
+        if len(user) == 1:
             #si existe un email asociado
             #se existe un el usuario (se supone que debe ser uno solo por sus validaciones)
-            org = org[0]
-            bd_password = org.password
+            user = user[0]
+            bd_password = user.password
             if check_password(password, bd_password): #convierte los hash y los comparas
-                return org
-        print("usuario incorrecto")
+                return user
+        
         
         return None 
 

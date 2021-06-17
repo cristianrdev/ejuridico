@@ -8,6 +8,7 @@ def secr_dashboard(request):
     this_user= User.objects.get(id = int(request.session['id'])) 
     all_users = User.objects.all()
 
+
     context = {
         'this_user' : this_user,
     }
