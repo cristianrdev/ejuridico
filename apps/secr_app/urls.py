@@ -3,9 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.index ),
-   
-
-
-
+    path('', views.secr_dashboard),
+    path('create_lawsuit',views.create_lawsuit),
 ]
