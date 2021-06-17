@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.contrib.auth.hashers import make_password, check_password
 from django import forms
 import re
 
@@ -44,10 +46,35 @@ class Administrator(models.Model): #super usuario que crea o elimina User (hay q
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password)
+        super(Administrator, self).save(*args, **kwargs)
+
+    @staticmethod
+    def authenticate(email, password):
+        admin = Administrator.objects.filter(email = email)
+        print ('user', admin)
+        #buscar si hay un email en la base de datos
+        if len(admin) == 1:
+            #si existe un email asociado
+            #se existe un el usuario (se supone que debe ser uno solo por sus validaciones)
+            admin = admin[0]
+            bd_password = admin.password
+            if check_password(password, bd_password): #convierte los hash y los comparas
+                return admin
+
+        return None 
+
 class UserType(models.Model):
     type_name = models.CharField(max_length=50, blank=False, null=False) #secretaria, abogado, o procuradora
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    # def get_form_kwargs(self):
+    #    kwargs = super().get_form_kwargs()
+    #    kwargs.update({'type_name': self.request})
+    #    return kwargs
 
 class User(models.Model):
     first_name1 = models.CharField(max_length=45, blank=False, null=False)
@@ -63,6 +90,28 @@ class User(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+    
+    def save(self, *args, **kwargs):
+        self.password = make_password(self.password)
+        super(User, self).save(*args, **kwargs)
+
+    @staticmethod
+    def authenticate(email, password):
+        org = User.objects.filter(email = email)
+        print ('user', org)
+        #buscar si hay un email en la base de datos
+        if len(org) == 1:
+            #si existe un email asociado
+            #se existe un el usuario (se supone que debe ser uno solo por sus validaciones)
+            org = org[0]
+            bd_password = org.password
+            if check_password(password, bd_password): #convierte los hash y los comparas
+                return org
+        print("usuario incorrecto")
+        
+        return None 
 
 
 
