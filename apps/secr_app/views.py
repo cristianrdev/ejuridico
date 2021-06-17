@@ -2,7 +2,7 @@ from apps.users_app.models import Administrator, User, UserType
 from django.shortcuts import redirect, render
 from apps.users_app.forms.register import UserForm
 
-def secr_dashboard(request):
+def index(request):
     if not 'id' in request.session or request.session['user_type'] != "administrator":
         return redirect('/')
     this_user= User.objects.get(id = int(request.session['id'])) 
