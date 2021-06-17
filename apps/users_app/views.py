@@ -53,24 +53,30 @@ def login_administrator(request):   #LOGIN ADMINISTRADOR
 def login_user(request): #LOGIN SECRETARIA Y PROCURADORA
     loginadministratorform = LoginAdministrator() 
     loginuserform = LoginUser(request.POST)
-    if loginadministratorform.is_valid():
+    print()
+    if loginuserform.is_valid():
         this_user = loginuserform.login(request.POST)
-        request.session['id'] = this_user.id
-        request.session['user_type'] = this_user.type
+        if this_user:
+            request.session['id'] = this_user.id
+            request.session['user_type'] = this_user.type.id
+            print(this_user.type)
 
-        if this_user.type == "secretary":
-            print("es secretaria")
-        if this_user.type == "procuradora":
-            print("es procuradora")
+            if this_user.type.id == 1:
+                print("es secretaria")
+                return redirect('/secretary')
+            if this_user.type.id == 2:
+                print("es procuradora")
 
         print("Login satisfactorio")
-        return redirect('/administrator')
-    # si no es válido render template del mismo form
-    context = {
-        'loginadministratorform': loginadministratorform,
-        'loginuserform': loginuserform,
-    }
-    return render(request, 'landing.html', context)
+        
+        # si no es válido render template del mismo form
+      
+        context = {
+            'loginadministratorform': loginadministratorform,
+            'loginuserform': loginuserform,
+            'error_login_user' : 'Usuario y/o contraseña incorrecto'
+        }
+        return render(request, 'landing.html', context)
 
 
 
