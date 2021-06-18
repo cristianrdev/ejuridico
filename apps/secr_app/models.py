@@ -6,7 +6,7 @@ import datetime
 
 # Create your models here.
 def ValidarLongitud(cadena):
-    if len(cadena) < 8:
+    if len(cadena) < 2:
         raise forms.ValidationError(
             f'Error: Debe contener mínimo 3 caracteres'
         )
@@ -30,7 +30,7 @@ class Defendant(models.Model):
 
     # email = models.CharField(max_length=45, blank=False, null=False)
     # password = models.CharField(max_length=100, blank=False, null=False)
-    defendant_created_by = models.ForeignKey(Administrator, related_name="user_create_defendant", on_delete = models.CASCADE)
+    defendant_created_by = models.ForeignKey(User, related_name="user_create_defendant", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -76,7 +76,7 @@ def Validar_Monto_Demandado(monto_demandado):
 class Lawsuit(models.Model):
     num_promissory_notes = models.CharField(max_length=45,blank=False, null=False)   #este campo
     final_date = models.DateField(validators=[Validar_Fecha_Mora])  #este campo
-    mount_to_pay = models.IntegerField(validators=[Validar_Monto_a_Pagar]) #este campo
+    mount_to_pay = models.CharField(max_length=255, validators=[Validar_Monto_a_Pagar]) #este campo
     num_operation = models.CharField(max_length=255, blank=False, null=False) #este campo
     suscription_date= models.DateField(validators=[Validar_Fecha_Suscripcion]) #este campo
     demand_amount= models.IntegerField(validators=[Validar_Monto_Demandado]) #este campo

@@ -58,25 +58,25 @@ def login_user(request): #LOGIN SECRETARIA Y PROCURADORA
         this_user = loginuserform.login(request.POST)
         if this_user:
             request.session['id'] = this_user.id
-            request.session['user_type'] = this_user.type.id
-            print(this_user.type)
+            request.session['user_type'] = this_user.type.type_name
+            
 
-            if this_user.type.id == 1:
+            if request.session['user_type'] == "secretaria":
                 print("es secretaria")
                 return redirect('/secretary')
-            if this_user.type.id == 2:
+            if this_user.type.id == "procuradora":
                 print("es procuradora")
 
         print("Login satisfactorio")
         
         # si no es válido render template del mismo form
       
-        context = {
-            'loginadministratorform': loginadministratorform,
-            'loginuserform': loginuserform,
-            'error_login_user' : 'Usuario y/o contraseña incorrecto'
-        }
-        return render(request, 'landing.html', context)
+    context = {
+        'loginadministratorform': loginadministratorform,
+        'loginuserform': loginuserform,
+        'error_login_user' : 'Usuario y/o contraseña incorrecto'
+    }
+    return render(request, 'landing.html', context)
 
 
 
@@ -107,6 +107,9 @@ def make_administrator(request): # si es get, despliega el formulario para ingre
             }
 
             return render(request, 'make_administrator.html', context)
+
+
+ 
 
 
     
