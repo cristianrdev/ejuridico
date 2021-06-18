@@ -70,6 +70,8 @@ class UserType(models.Model):
     type_name = models.CharField(max_length=50, blank=False, null=False) #secretaria, abogado, o procuradora
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.type_name
 
     # def get_form_kwargs(self):
     #    kwargs = super().get_form_kwargs()
